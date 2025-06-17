@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор параметров</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            gap: 100px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .button-container {
+            flex-direction: row;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+        .name-window {
+            margin-bottom: 1rem;
+         }
+    </style>
+    <script>
+        function validateName() {
+            const nameInput = document.getElementById("name").value;
+            if (!nameInput) {
+                alert("Пожалуйста, введите имя.");
+                return false;
+            }
+            return true;
+        }
+
+        function disableRadioRequirements() {
+            document.querySelectorAll('input[name="destiny"]').forEach(function(el) {
+                el.removeAttribute("required");
+            });
+            document.querySelectorAll('input[name="person"]').forEach(function(el) {
+                el.removeAttribute("required");
+            });
+        }
+    </script>
+</head>
+<body>
+<form action="/" method="POST" onsubmit="return validateName()">
+    <label for="name">Имя:</label>
+    <input  class="name-window" type="text" id="name" name="name" th:value="${name != null ? name : ''}" required>
+    <div class="button-container">
+        <label>
+            <input type="radio" name="destiny" value="X" required>
+            Крестик
+        </label>
+        <label>
+            <input type="radio" name="destiny" value="O" required>
+            Нолик
+        </label>
+    </div>
+    <div class="button-container">
+        <label>
+            <input type="radio" name="person" value="C" required>
+            Компьютер
+        </label>
+        <label>
+            <input type="radio" name="person" value="H" required>
+            Человек
+        </label>
+    </div>
+    <div class="button-container">
+        <button type="submit" name="action" value="start">Начать игру</button>
+        <button type="submit" name="action" value="join" onclick="disableRadioRequirements()">Присоединиться к игре</button>
+        <button type="button" onclick="window.location.href='/logout';">Выйти</button>
+    </div>
+</form>
+</body>
+</html>
