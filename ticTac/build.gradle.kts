@@ -15,6 +15,7 @@ dependencies {
     implementation ("org.springframework.boot:spring-boot-starter-thymeleaf");
     implementation("org.springframework.boot:spring-boot-starter-web");
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation("org.postgresql:postgresql:42.7.5")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
@@ -24,4 +25,8 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.bootJar {
+    archiveFileName.set("tic-tac-1.0-all.jar")
 }
